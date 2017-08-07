@@ -1,0 +1,33 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+home:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+    methods:  [GET]
+
+atividades:
+    path:     /atividades
+    defaults: { _controller: AppBundle:Atividade:index }
+    methods:  [GET]
+
+atividades_pesquisar:
+    path:     /atividades/pesquisar/{filtro}
+    defaults: { _controller: AppBundle:Atividade:index }
+    methods:  [GET]
+
+atividades_criar:
+    path:     /atividades/criar
+    defaults: { _controller: AppBundle:Atividade:criar }
+    methods:  [GET, POST]
+
+atividades_atualizar:
+    path:     /atividades/{id}/atualizar
+    defaults: { _controller: AppBundle:Atividade:atualizar }
+    methods:  [GET, POST]
+
+atividades_excluir:
+    path:     /atividades/{id}/excluir
+    defaults: { _controller: AppBundle:Atividade:excluir }
+    methods:  [GET]

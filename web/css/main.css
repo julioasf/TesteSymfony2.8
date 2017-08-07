@@ -1,0 +1,34 @@
+body {
+    font-family: 'Lato';
+}
+
+table.base {
+    /* gruda uma célula na outra */
+    border-collapse:collapse;
+    /* colocando bordas externas na tabela */
+    border-width:2px;
+    border-style:solid;
+    border-color:#c9c5c5;
+    width:100%;
+}
+
+/* Colocando bordas nas colunas e linhas */
+table.base td, th, tr{
+    /*border-collapse:collapse;*/
+    /* Declaração única para borda*/
+    border:2px solid #c9c5c5;
+}
+
+table.base tr.info{
+    bgcolor: #FF0000;
+}
+
+a.link-delete {
+    color: #f46464;
+    text-decoration: none;
+}
+
+a.link-delete:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}

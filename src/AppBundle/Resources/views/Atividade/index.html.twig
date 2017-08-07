@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}AppBundle:Atividade:index{% endblock %}  #}
+
+{% block body %}
+	{% block content %}
+		<div class="container">
+		    <div class="row">
+		        <div class="col-md-10 col-md-offset-1">
+		            <div class="panel panel-default">
+		                <div class="panel-heading">Atividades</div>
+
+		                <div class="panel-body">
+	                        {% for flash_message in app.session.flashBag.get('notice') %}
+	                        	{% if flash_message %}
+	                        	<p class="alert alert-info">
+									{{ flash_message }}
+								</p>
+								<hr>
+								{% endif %}
+							{% endfor %}
+
+		                    Filtros:<br />
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'ativo'}) }}" class="link-edit">Ativo</a> |
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'inativo'}) }}" class="link-edit">Inativo</a> |
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'pendente'}) }}" class="link-edit">Pendente</a> |
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'desenvolvimento'}) }}" class="link-edit">Em Desenvolvimento</a> |
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'teste'}) }}" class="link-edit">Em Teste</a> |
+		                    <a href="{{ path('atividades_pesquisar', {'filtro': 'concluido'}) }}" class="link-edit">Concluido</a>
+		                    <hr>
+
+		                    Total de registros: N registros.<br /><br />
+
+		                    <table class="base">
+		                        <tr>
+		                            <th>ID</th><th>Nome</th><th>Situa&ccedil;&aacute;o</th><th>Status</th><th>Data In&iacute;o</th><th>Data Fim</th><th>Ações</th>
+		                        </tr>
+		                    {% for atividade in atividades %}
+		                    	{% if atividade.status.name != 'Concluído' %}
+		                        <tr>
+		                        {% else %}
+		                        <tr bgcolor="#cdeef7">
+		                        {% endif %}
+		                            <td>{{ atividade.id }}</td>
+		                            <td>{{ atividade.name }}</td>
+		                            <td>{{ atividade.situacao }}</td>
+		                            <td>{{ atividade.status.name }}</td>
+		                            <td>{{ atividade.dataInicio|date('d/m/Y') }}</td>
+		                            <td>{{ atividade.dataFim is empty ? "" : atividade.dataFim|date('d/m/Y') }}</td>
+		                            <td>
+		                            	{% if atividade.status.name != 'Concluído' %}
+		                                <a href="{{ path('atividades_atualizar', {'id': atividade.id}) }}" class="link-edit">Editar</a> |
+		                                <a href="{{ path('atividades_excluir', {'id': atividade.id}) }}" class="link-delete" onclick="return confirmarExclusao();">Excluir</a>
+		                                {% endif %}
+		                            </td>
+		                        </tr>
+		                    {% endfor %}
+		                    </table>
+		                    <hr>
+		                    <a href="{{ path('atividades_criar') }}" class="btn btn-primary">Criar</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	{% endblock %}
+{% endblock %}
